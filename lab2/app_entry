@@ -1,0 +1,28 @@
+internal abstract class Program
+{
+    private static void Main()
+    {
+        IItemFactory standardFactory = new StandardItemFactory();
+
+        var inventory = new Inventory();
+
+        var manager = new InventoryManager(standardFactory);
+
+        manager.AddWeaponToInventory(inventory);
+        manager.AddArmorToInventory(inventory);
+        manager.AddPotionToInventory(inventory);
+
+        inventory.ShowInventory();
+
+        inventory.UseItem("Железный меч");
+        inventory.UseItem("Лечебное зелье");
+
+        manager.AddWeaponToInventory(inventory);
+
+        inventory.Upgrade("Железный меч");
+
+        inventory.ShowInventory();
+
+        inventory.UseItem("Железный меч");
+    }
+}
