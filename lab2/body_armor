@@ -1,0 +1,14 @@
+public class Armor : Item, IEquip, IUse
+{
+    public int Defense { get; set; }
+
+    public void Equip()
+    {
+        Console.WriteLine($"{Name} экипирован.");
+    }
+
+    public override void Use()
+    {
+        Console.WriteLine($"{Name} дает защиту {Defense}.");
+    }
+}
