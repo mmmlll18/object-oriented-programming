@@ -1,0 +1,25 @@
+public static class Program
+{
+    public static void Main(string[] args)
+    {
+        var orderBuilder = new OrderBuilder();
+        Order order = orderBuilder
+            .AddItem(new MenuItem("Бурегнка", 10.99m))
+            .AddItem(new MenuItem("Пепса", 1.99m))
+            .Build();
+        Console.WriteLine($"Общая стоимость: {order.TotalPrice}");
+
+        IDiscountStrategy discountStrategy = new StandardDiscount(10);
+        var priceCalculator = new PriceCalculator();
+        decimal discountedPrice = priceCalculator.CalculateTotalPrice(order, discountStrategy);
+        Console.WriteLine($"Цена со скидкой: {discountedPrice}");
+
+        Console.WriteLine($"Статус заказа: {order.GetStatus()}");
+
+        order.NextState();
+        Console.WriteLine($"Статус заказа: {order.GetStatus()}");
+
+        order.NextState();
+        Console.WriteLine($"Статус заказа: {order.GetStatus()}");
+    }
+}
