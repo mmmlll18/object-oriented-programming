@@ -1,0 +1,21 @@
+namespace VendingMachineApp.Models
+{
+    public class Product
+    {
+        public string Name { get; set; }
+        public int Price { get; set; } 
+        public int Amound { get; set; }
+
+        public Product(string name, int price, int amound)
+        {
+            Name = name;
+            Price = price;
+            Amound = amound;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} - {Price / 100.0:F2} руб. (Остаток: {Amound})";
+        }
+    }
+}
