@@ -1,0 +1,46 @@
+public class Inventory
+{
+    private readonly List<Item> _items = new List<Item>();
+
+    public void AddItem(Item item)
+    {
+        _items.Add(item);
+        Console.WriteLine($"{item.Name} добавлено в инвентарь");
+    }
+
+    public void UseItem(string name)
+    {
+        Item item = GetItem(name);
+        item.Use();
+        _items.Remove(item);
+        Console.WriteLine($"{item.Name} был использован.");
+    }
+
+    public void Upgrade(string name)
+    {
+        Item item = GetItem(name);
+
+        if (item is IUpgrade upgradeableItem)
+        {
+            upgradeableItem.Upgrade();
+        }
+        else
+        {
+            Console.WriteLine($"{item.Name} не может быть улучшен.");
+        }
+    }
+
+    public Item GetItem(string name)
+    {
+        return _items.FirstOrDefault(i => i.Name == name) ?? throw new InvalidOperationException("Такого предмета нет.");
+    }
+
+    public void ShowInventory()
+    {
+        Console.WriteLine("Содержимое инвентаря:");
+        foreach (Item item in _items)
+        {
+            Console.WriteLine($"{item.Name}: {item.Overview}");
+        }
+    }
+}
