@@ -1,0 +1,84 @@
+using VendingMachineApp.Services;
+using VendingMachineApp.Utils;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        VendingMachine vm = new VendingMachine();
+        AdminPanel adminPanel = new AdminPanel(vm);
+
+        while (true)
+        {
+            Console.WriteLine("\n--- Вендинговый автомат ---");
+            Console.WriteLine($"Ваш баланс: {vm.GetBalance() / 100.0:F2} руб.");
+            Console.WriteLine("1. Показать товары");
+            Console.WriteLine("2. Внести денежку");
+            Console.WriteLine("3. Купить товар");
+            Console.WriteLine("4. Админ");
+            Console.WriteLine("5. Выдать сдачу");
+            Console.WriteLine("6. Выход");
+            Console.Write("Выберите действие: ");
+
+            string? choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    vm.ShowProducts();
+                    break;
+                case "2":
+                    Console.Write("Введите номинал (монета: 1,2,5,10 руб; купюра: 100,200,500,1000,5000 руб): ");
+                    if (int.TryParse(Console.ReadLine(), out int value))
+                    {
+                        int[] validCoins = { 1, 2, 5, 10 };
+                        int[] validBills = { 100, 200, 500, 1000, 5000 };
+
+                        if (validCoins.Contains(value) || validBills.Contains(value))
+                            vm.InsertCoin(new Coin(value * 100));
+                        else
+                            Console.WriteLine("Недопустимый номинал!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ошибка ввода!");
+                    }
+                    break;
+                case "3":
+                    vm.ShowProducts();
+                    Console.Write("Введите номер товара (или 0 для выхода в меню): ");
+                    if (int.TryParse(Console.ReadLine(), out int index))
+                    {
+                        if (index == 0)
+                        {
+                            Console.WriteLine("Вы вышли в главное меню.");
+                            break;
+                        }
+                        vm.BuyProduct(index);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ошибка ввода!");
+                    }
+                    break;
+                case "4":
+                    Console.Write("Введите пароль администратора: ");
+                    string? pass = Console.ReadLine();
+                    if (pass == "1234")
+                        adminPanel.Run();
+                    else
+                        Console.WriteLine("Неверный пароль.");
+                    break;
+                case "5":
+                    vm.GiveChange();
+                    break;
+                case "6":
+                    Console.WriteLine("Выход...");
+                    return;
+                default:
+                    Console.WriteLine("Неверный выбор.");
+                    break;
+            }
+        }
+    }
+}
