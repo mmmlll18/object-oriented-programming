@@ -1,0 +1,29 @@
+public class StandardItemFactory : IItemFactory
+{
+    public Weapon CreateWeapon()
+    {
+        return new WeaponBuilder()
+            .SetName("Железный меч")
+            .SetDamage(30)
+            .SetDescription("Каменный меч.")
+            .Build();
+    }
+
+    public Armor CreateArmor()
+    {
+        return new ArmorBuilder()
+            .SetName("Железная броня")
+            .SetDefense(20)
+            .SetOverview("Простая кожаная броня.")
+            .Build();
+    }
+
+    public Potion CreatePotion()
+    {
+        return new PotionBuilder()
+            .SetName("Лечебное")
+            .SetEffect("Восстанавливает половину хп.")
+            .SetOverview("Зелье.")
+            .Build();
+    }
+}
