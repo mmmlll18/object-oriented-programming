@@ -1,0 +1,29 @@
+public class Order
+{
+    public IOrderState CurrentState { get; set; }
+
+    public decimal TotalPrice { get; private set; }
+
+    private List<MenuItem> Items { get; set; } = new List<MenuItem>();
+
+    public Order()
+    {
+        CurrentState = new PreparingState();
+    }
+
+    public void AddItem(MenuItem item)
+    {
+        Items.Add(item);
+        TotalPrice += item.Price;
+    }
+
+    public void NextState()
+    {
+        CurrentState.Advance(this);
+    }
+
+    public string GetStatus()
+    {
+        return CurrentState.Status();
+    }
+}
