@@ -1,0 +1,27 @@
+public class InventoryManager
+{
+    private readonly IItemFactory _itemFactory;
+
+    public InventoryManager(IItemFactory factory)
+    {
+        this._itemFactory = factory;
+    }
+
+    public void AddWeaponToInventory(Inventory inventory)
+    {
+        Weapon weapon = _itemFactory.CreateWeapon();
+        inventory.AddItem(weapon);
+    }
+
+    public void AddArmorToInventory(Inventory inventory)
+    {
+        Armor armor = _itemFactory.CreateArmor();
+        inventory.AddItem(armor);
+    }
+
+    public void AddPotionToInventory(Inventory inventory)
+    {
+        Potion potion = _itemFactory.CreatePotion();
+        inventory.AddItem(potion);
+    }
+}
