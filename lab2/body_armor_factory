@@ -1,0 +1,36 @@
+public class ArmorBuilder
+{
+    public Armor Armor { get; }
+
+    public ArmorBuilder()
+    {
+        Armor = new Armor
+        {
+            Name = string.Empty,
+            Overview = string.Empty,
+        };
+    }
+
+    public ArmorBuilder SetName(string name)
+    {
+        Armor.Name = name;
+        return this;
+    }
+
+    public ArmorBuilder SetDefense(int defense)
+    {
+        Armor.Defense = defense;
+        return this;
+    }
+
+    public ArmorBuilder SetOverview(string overview)
+    {
+        Armor.Overview = overview;
+        return this;
+    }
+
+    public Armor Build()
+    {
+        return Armor;
+    }
+}
