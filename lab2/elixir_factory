@@ -1,0 +1,36 @@
+public class PotionBuilder
+{
+    public Potion Potion { get; }
+
+    public PotionBuilder()
+    {
+        Potion = new Potion
+        {
+            Name = string.Empty,
+            Overview = string.Empty,
+        };
+    }
+
+    public PotionBuilder SetName(string name)
+    {
+        Potion.Name = name;
+        return this;
+    }
+
+    public PotionBuilder SetEffect(string effect)
+    {
+        Potion.Effect = effect;
+        return this;
+    }
+
+    public PotionBuilder SetOverview(string overview)
+    {
+        Potion.Overview = overview;
+        return this;
+    }
+
+    public Potion Build()
+    {
+        return Potion;
+    }
+}
