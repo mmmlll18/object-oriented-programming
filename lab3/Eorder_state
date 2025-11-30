@@ -1,0 +1,6 @@
+public enum OrderState
+{
+    Preparing,
+    OutForDelivery,
+    Delivered,
+}
