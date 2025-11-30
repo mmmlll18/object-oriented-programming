@@ -1,0 +1,20 @@
+public class Weapon : Item, IEquip, IUse, IUpgrade
+{
+    public int Damage { get; set; }
+
+    public void Equip()
+    {
+        Console.WriteLine($"{Name} экипирован.");
+    }
+
+    public override void Use()
+    {
+        Console.WriteLine($"{Name} наносит {Damage} урона.");
+    }
+
+    public void Upgrade()
+    {
+        Damage += 20;
+        Console.WriteLine($"{Name} был улучшен, урон: {Damage}");
+    }
+}
