@@ -11,10 +11,10 @@ namespace VendingMachineApp.Services
         {
             products = new List<Product>
             {
-                new Product("Вода", 5000, 5), 
-                new Product("Чай", 7000, 3),  
-                new Product("Кофе", 10000, 4),
-                new Product("Сок", 8500, 2)   
+                new Product("Крабсбургер", 1000, 5), 
+                new Product("Чизбургер", 2000, 3),  
+                new Product("Гамбургер", 3000, 4),
+                new Product("Чикенбургер", 4000, 2)   
             };
             insertedMoney = 0;
             collectedMoney = 0;
@@ -39,7 +39,7 @@ namespace VendingMachineApp.Services
         {
             if (index < 1 || index > products.Count)
             {
-                Console.WriteLine("Такого товара нет.");
+                Console.WriteLine("Такого товара нет в наличии(или вовсе..).");
                 return;
             }
 
@@ -53,7 +53,7 @@ namespace VendingMachineApp.Services
 
             if (insertedMoney < product.Price)
             {
-                Console.WriteLine($"Недостаточно средств. Нужно ещё {(product.Price - insertedMoney) / 100.0:F2} руб.");
+                Console.WriteLine($"Недостаточно средств. Пополните {(product.Price - insertedMoney) / 100.0:F2} руб.");
                 return;
             }
 
@@ -61,7 +61,7 @@ namespace VendingMachineApp.Services
             collectedMoney += product.Price;
             product.Amound--;
 
-            Console.WriteLine($"Вы купили: {product.Name}. Спасибо за покупку!");
+            Console.WriteLine($"Куплено: {product.Name}. Спасибо за покупку!");
         }
 
         public void GiveChange()
