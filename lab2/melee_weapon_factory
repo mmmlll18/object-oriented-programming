@@ -1,0 +1,36 @@
+public class WeaponBuilder
+{
+    public Weapon Weapon { get; }
+
+    public WeaponBuilder()
+    {
+        Weapon = new Weapon
+        {
+            Name = string.Empty,
+            Overview = string.Empty,
+        };
+    }
+
+    public WeaponBuilder SetName(string name)
+    {
+        Weapon.Name = name;
+        return this;
+    }
+
+    public WeaponBuilder SetDescription(string overview)
+    {
+        Weapon.Overview = overview;
+        return this;
+    }
+
+    public WeaponBuilder SetDamage(int damage)
+    {
+        Weapon.Damage = damage;
+        return this;
+    }
+
+    public Weapon Build()
+    {
+        return Weapon;
+    }
+}
