@@ -1,1 +1,1 @@
-# object-oriented-programming
+# Марковник Полина (466635)
