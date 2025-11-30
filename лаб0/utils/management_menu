@@ -1,0 +1,63 @@
+using VendingMachineApp.Services;
+
+namespace VendingMachineApp.Utils
+{
+    public class AdminPanel
+    {
+        private VendingMachine machine;
+
+        public AdminPanel(VendingMachine vm)
+        {
+            machine = vm;
+        }
+
+        public void Run()
+        {
+            Console.WriteLine("\n--- Админ-панель ---");
+            Console.WriteLine("1. Пополнить товар");
+            Console.WriteLine("2. Забрать деньги");
+            Console.WriteLine("3. Выйти");
+
+            while (true)
+            {
+                Console.Write("Выберите действие: ");
+                string input = Console.ReadLine();
+
+                if (input == "1")
+                {
+                    machine.ShowProducts();
+                    Console.Write("Введите номер выбранного товара (или 0 для возврата в меню): ");
+                    int index = int.Parse(Console.ReadLine());
+
+                    if (index == 0)
+                    {
+                        Console.WriteLine("\nВы вернулись в меню админ-панели.");
+						Console.WriteLine("--- Админ-панель ---");
+            			Console.WriteLine("1. Пополнить товар");
+            			Console.WriteLine("2. Забрать деньги");
+            			Console.WriteLine("3. Выйти");
+                        continue;
+                    }
+
+                    Console.Write("Введите количество: ");
+                    int amd = int.Parse(Console.ReadLine());
+                    machine.Restock(index, amd);
+                    Console.WriteLine("Товар пополнен.");
+                }
+                else if (input == "2")
+                {
+                    machine.CollectMoney();
+                }
+                else if (input == "3")
+                {
+                    Console.WriteLine("Выход из админ-панели...");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Неверно.");
+                }
+            }
+        }
+    }
+}
